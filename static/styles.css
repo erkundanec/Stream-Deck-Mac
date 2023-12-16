@@ -1,0 +1,32 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f2f2f2; /* Light grey background color */
+}
+
+.stream-deck {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Responsive grid with minimum item width of 150px */
+    gap: 20px; /* Spacing between items */
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 20px;
+}
+
+.stream-button {
+    width: 100%;
+    height: 100px;
+    background-color: #3498db; /* Blue button color */
+    color: #ffffff; /* White text color */
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Smooth background color transition */
+}
+
+.stream-button:hover {
+    background-color: #2980b9; /* Darker blue on hover */
+}

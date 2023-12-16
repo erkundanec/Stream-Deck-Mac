@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+  integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+  crossorigin="anonymous"
+/> <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Stream Deck</title>
+</head>
+<body>
+    <div class="stream-deck">
+        <button class="stream-button" onclick="launchApplication('TextEdit')"><i class="fas fa-file-alt"></i></button>
+        <button class="stream-button" onclick="launchApplication('Calculator')"><i class="fas fa-calculator"></i></button>
+        <button class="stream-button" onclick="performSystemCommand('say Hello from Stream Deck')"><i class="fas fa-volume-up"></i></button>
+        <button class="stream-button" onclick="openWebsite('https://www.example.com')"><i class="fas fa-globe"></i></button>
+        <button class="stream-button" onclick="multimediaControls('play')"><i class="fas fa-play"></i></button>
+        <button class="stream-button" onclick="runCustomScript('/path/to/your/script.sh')"><i class="fas fa-code"></i></button>
+        <button class="stream-button" onclick="clipboardManagement('copy')"><i class="fas fa-copy"></i></button>
+        <button class="stream-button" onclick="clipboardManagement('paste')"><i class="fas fa-paste"></i></button>
+        <button class="stream-button" onclick="clipboardManagement('cut')"><i class="fas fa-cut"></i></button>
+        <button class="stream-button" onclick="clipboardManagement('clear')"><i class="fas fa-eraser"></i></button>
+        <button class="stream-button" onclick="clipboardManagement('undo')"><i class="fas fa-undo"></i></button>
+        <button class="stream-button" onclick="clipboardManagement('redo')"><i class="fas fa-redo"></i></button>
+        <button class="stream-button" onclick="clipboardManagement('selectall')"><i class="fas fa-list"></i></button>
+        <button class="stream-button" onclick="clipboardManagement('save')"><i class="fas fa-save"></i></button>
+
+    </div>
+
+    <script>
+        function launchApplication(applicationName) {
+            fetch(`/launch/${applicationName}`)
+                .then(response => response.text())
+                .then(result => console.log(result))
+                .catch(error => console.error('Error:', error));
+        }
+
+        function performSystemCommand(command) {
+            fetch(`/system/${encodeURIComponent(command)}`)
+                .then(response => response.text())
+                .then(result => console.log(result))
+                .catch(error => console.error('Error:', error));
+        }
+
+        function openWebsite(websiteUrl) {
+            fetch(`/open/${encodeURIComponent(websiteUrl)}`)
+                .then(response => response.text())
+                .then(result => console.log(result))
+                .catch(error => console.error('Error:', error));
+        }
+
+        function multimediaControls(action) {
+            fetch(`/multimedia/${action}`)
+                .then(response => response.text())
+                .then(result => console.log(result))
+                .catch(error => console.error('Error:', error));
+        }
+
+        function runCustomScript(scriptPath) {
+            fetch(`/script/${encodeURIComponent(scriptPath)}`)
+                .then(response => response.text())
+                .then(result => console.log(result))
+                .catch(error => console.error('Error:', error));
+        }
+
+        function clipboardManagement(action) {
+            fetch(`/clipboard/${action}`)
+                .then(response => response.text())
+                .then(result => console.log(result))
+                .catch(error => console.error('Error:', error));
+        }
+
+        function openWebsite(url) {
+            fetch('/open-website', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ url }),
+            })
+            .then(response => response.text())
+            .then(result => console.log(result))
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>
